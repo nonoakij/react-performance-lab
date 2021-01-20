@@ -1,12 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { VolumeContext } from '../../providers/Volume';
 
-const Header: React.FC = () => {
-  const { volume, setVolume } = useContext(VolumeContext);
+interface Props {
+  volume: number
+  setVolume: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Header: React.FC<Props> = ({ volume, setVolume }) => {
   const [value, setValue] = useState(volume);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(e.currentTarget.value));
+    if (Number(e.currentTarget.value)) {
+      setValue(Number(e.currentTarget.value));
+    } else {
+      alert('数字を入力してください');
+    }
   };
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {

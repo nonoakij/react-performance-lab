@@ -1,20 +1,59 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import FunctionalComponent from '../../components/FunctionalComponent';
-import { VolumeContext } from '../../providers/Volume';
 
-const functionalPage: React.FC = () => {
-  const [count, setCount] = useState(0);
-  const handleUpdateButton = () => {
-    setCount(count + 1);
-  };
+interface Props {
+  volume: number
+}
 
-  const { volume } = useContext(VolumeContext);
-  return (
-    <div>
-      <div>page component: called {count} times<button type="button" onClick={handleUpdateButton}>update</button></div>
-      {[...Array(volume)].map((_, i) => <FunctionalComponent key={i} text="text" />)}
-    </div>
-  );
-};
+interface State {
+  renderCount: number
+}
+
+class functionalPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      renderCount: 0,
+    };
+  }
+
+  shouldComponentUpdate(): boolean {
+    performance.mark('update');
+    return true;
+  }
+
+  componentDidUpdate(): void {
+    performance.mark('updated');
+    performance.measure('measure update to updated', 'update', 'updated');
+    console.log(performance.getEntriesByType('measure'));
+  }
+
+  componentWillUnmount(): void {
+    performance.clearMarks();
+    performance.clearMeasures();
+  }
+
+  render(): JSX.Element {
+    const { renderCount } = this.state;
+    const { volume } = this.props;
+    return (
+      <div>
+        <div style={{ paddingBottom: '16px' }}>
+          page component: called {renderCount} times
+          <button
+            type="button"
+            onClick={() => this.setState({
+              renderCount: renderCount + 1,
+            })}
+          >update
+          </button>
+        </div>
+        {[...Array(volume)].map((_, i) => (
+          <FunctionalComponent key={i} text="text" />
+        ))}
+      </div>
+    );
+  }
+}
 
 export default functionalPage;

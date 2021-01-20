@@ -1,21 +1,59 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React from 'react';
 import MemoedHeavyComponent from '../../components/MemoedHeavyComponent';
-import { VolumeContext } from '../../providers/Volume';
 
-const memoedHeavyPage: React.FC = () => {
-  const [count, setCount] = useState(0);
-  const handleUpdateButton = () => {
-    setCount(count + 1);
-  };
+interface Props {
+  volume: number
+}
 
-  const { volume } = useContext(VolumeContext);
-  const arr = useMemo(() => [...Array(volume)].map((_, i) => i), [volume]);
-  return (
-    <div>
-      <div>page component: called {count} times<button type="button" onClick={handleUpdateButton}>update</button></div>
-      <MemoedHeavyComponent arr={arr} />
-    </div>
-  );
-};
+interface State {
+  renderCount: number
+  arr: number[]
+}
+
+class memoedHeavyPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const arr = [...Array(props.volume)].map((_, i) => i);
+    this.state = {
+      renderCount: 0,
+      arr,
+    };
+  }
+
+  shouldComponentUpdate(): boolean {
+    performance.mark('update');
+    return true;
+  }
+
+  componentDidUpdate(): void {
+    performance.mark('updated');
+    performance.measure('measure update to updated', 'update', 'updated');
+    console.log(performance.getEntriesByType('measure'));
+  }
+
+  componentWillUnmount(): void {
+    performance.clearMarks();
+    performance.clearMeasures();
+  }
+
+  render(): JSX.Element {
+    const { renderCount, arr } = this.state;
+    return (
+      <div>
+        <div style={{ paddingBottom: '16px' }}>
+          page component: called {renderCount} times
+          <button
+            type="button"
+            onClick={() => this.setState({
+              renderCount: renderCount + 1,
+            })}
+          >update
+          </button>
+        </div>
+        <MemoedHeavyComponent arr={arr} />
+      </div>
+    );
+  }
+}
 
 export default memoedHeavyPage;

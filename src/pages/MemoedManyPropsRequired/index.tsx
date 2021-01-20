@@ -1,39 +1,78 @@
-import React, { useContext, useMemo, useState } from 'react';
-import MemoedManyPropsRequiredComponent from '../../components/MemoedManyPropsRequiredComponent';
+import React from 'react';
 import MemoedComponent from '../../components/MemoedComponent';
-import { VolumeContext } from '../../providers/Volume';
+import MemoedManyPropsRequiredComponent from '../../components/MemoedManyPropsRequiredComponent';
 
-const memoedManyPropsRequiredPage: React.FC = () => {
-  const [count, setCount] = useState(0);
-  const handleUpdateButton = () => {
-    setCount(count + 1);
-  };
-  const { volume } = useContext(VolumeContext);
+interface Props {
+  volume: number
+}
 
-  const arr = useMemo(() => [...Array(2)].map((_, i) => i), [volume]);
-  const obj = useMemo(() => ({ name: 'tarou' }), []);
-  return (
-    <>
-      <div>page component: called {count} times<button type="button" onClick={handleUpdateButton}>update</button></div>
-      <MemoedManyPropsRequiredComponent
-        text1="test"
-        text2="test"
-        text3="test"
-        text4="test"
-        text5="test"
-        text6="test"
-        text7="test"
-        array={arr}
-        obj={obj}
-      >
-        <MemoedComponent text="text" />
-        <MemoedComponent text="text" />
-        <MemoedComponent text="text" />
-        <MemoedComponent text="text" />
-        <MemoedComponent text="text" />
-      </MemoedManyPropsRequiredComponent>
-    </>
-  );
-};
+interface State {
+  renderCount: number
+  arr: number[]
+  obj: { name: string }
+}
+
+class memoedManyPropsRequiredPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const arr = [...Array(props.volume)].map((_, i) => i);
+    this.state = {
+      renderCount: 0,
+      arr,
+      obj: { name: 'tarou' },
+    };
+  }
+
+  shouldComponentUpdate(): boolean {
+    performance.mark('update');
+    return true;
+  }
+
+  componentDidUpdate(): void {
+    performance.mark('updated');
+    performance.measure('measure update to updated', 'update', 'updated');
+    console.log(performance.getEntriesByType('measure'));
+  }
+
+  componentWillUnmount(): void {
+    performance.clearMarks();
+    performance.clearMeasures();
+  }
+
+  render(): JSX.Element {
+    const { renderCount, arr, obj } = this.state;
+    return (
+      <div>
+        <div style={{ paddingBottom: '16px' }}>
+          page component: called {renderCount} times
+          <button
+            type="button"
+            onClick={() => this.setState({
+              renderCount: renderCount + 1,
+            })}
+          >update
+          </button>
+        </div>
+        <MemoedManyPropsRequiredComponent
+          text1="test"
+          text2="test"
+          text3="test"
+          text4="test"
+          text5="test"
+          text6="test"
+          text7="test"
+          array={arr}
+          obj={obj}
+        >
+          <MemoedComponent text="text" />
+          <MemoedComponent text="text" />
+          <MemoedComponent text="text" />
+          <MemoedComponent text="text" />
+          <MemoedComponent text="text" />
+        </MemoedManyPropsRequiredComponent>
+      </div>
+    );
+  }
+}
 
 export default memoedManyPropsRequiredPage;

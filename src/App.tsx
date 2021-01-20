@@ -1,34 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { VolumeProvider } from './providers/Volume';
 import TopPage from './pages/Top';
 import Header from './components/Header';
-import manyPropsRequiredPage from './pages/ManyPropsRequired';
-import functionalPage from './pages/Functional';
-import memoedFunctionalPage from './pages/MemoedFunctional';
-import heavyPage from './pages/Heavy';
-import memoedHeavyPage from './pages/MemoedHeavy';
-import memoedManyPropsRequiredPage from './pages/MemoedManyPropsRequired';
+import ManyPropsRequiredPage from './pages/ManyPropsRequired';
+import FunctionalPage from './pages/Functional';
+import MemoedFunctionalPage from './pages/MemoedFunctional';
+import HeavyPage from './pages/Heavy';
+import MemoedHeavyPage from './pages/MemoedHeavy';
+import MemoedManyPropsRequiredPage from './pages/MemoedManyPropsRequired';
 
-const App: React.FC = () => (
-  <VolumeProvider>
+const App: React.FC = () => {
+  const [volume, setVolume] = useState(1);
+  return (
     <div className="App" style={{ padding: '8px' }}>
       <BrowserRouter>
         <header style={{ marginBottom: '16px' }}>
-          <Header />
+          <Header volume={volume} setVolume={setVolume} />
         </header>
         <Switch>
           <Route exact path="/" component={TopPage} />
-          <Route exact path="/functional" component={functionalPage} />
-          <Route exact path="/heavy" component={heavyPage} />
-          <Route exact path="/manyPropsRequired" component={manyPropsRequiredPage} />
-          <Route exact path="/memoed" component={memoedFunctionalPage} />
-          <Route exact path="/memoedHeavy" component={memoedHeavyPage} />
-          <Route exact path="/memoedManyPropsRequired" component={memoedManyPropsRequiredPage} />
+          <Route exact path="/functional" component={() => <FunctionalPage volume={volume} />} />
+          <Route exact path="/heavy" component={() => <HeavyPage volume={volume} />} />
+          <Route exact path="/manyPropsRequired" component={() => <ManyPropsRequiredPage volume={volume} />} />
+          <Route exact path="/memoed" component={() => <MemoedFunctionalPage volume={volume} />} />
+          <Route exact path="/memoedHeavy" component={() => <MemoedHeavyPage volume={volume} />} />
+          <Route exact path="/memoedManyPropsRequired" component={() => <MemoedManyPropsRequiredPage volume={volume} />} />
         </Switch>
       </BrowserRouter>
     </div>
-  </VolumeProvider>
-);
+  );
+};
 
 export default App;

@@ -33,7 +33,9 @@ const manyPropsRequiredComponent: React.FC<props> = ({
     {text5},
     {text6},
     {text7},
-    {array.map((item) => item)}
+    <div style={{ wordBreak: 'break-word' }}>
+      {array.map((item) => (item))}
+    </div>
     {obj.name}
     {children}
   </div>
