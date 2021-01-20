@@ -3,4 +3,4 @@ reactのパフォーマンス確認用のリポジトリ
 
 # todo
 - [ ] test書く
-- [ ] prettier 導入
+- [ ] prettier 導入
