@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { VolumeProvider } from './providers/Volume';
 import TopPage from './pages/Top';
