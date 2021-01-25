@@ -9,7 +9,19 @@ interface Props {
 interface State {
   renderCount: number
   arr: number[]
-  obj: { name: string }
+  obj: {
+    id: number
+    name: string
+    data: {
+      height: number
+      weight: number
+      age: number
+      birthplace: {
+        country: string
+        city: string
+      }
+    }
+  }
 }
 
 class manyPropsRequiredPage extends React.Component<Props, State> {
@@ -19,7 +31,19 @@ class manyPropsRequiredPage extends React.Component<Props, State> {
     this.state = {
       renderCount: 0,
       arr,
-      obj: { name: 'tarou' },
+      obj: {
+        id: 123456,
+        name: 'jordan',
+        data: {
+          height: 198,
+          weight: 98,
+          age: 57,
+          birthplace: {
+            country: 'us',
+            city: 'NY',
+          },
+        },
+      },
     };
   }
 
