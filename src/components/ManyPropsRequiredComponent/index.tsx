@@ -48,7 +48,7 @@ const manyPropsRequiredComponent: React.FC<props> = ({
     <div style={{ wordBreak: 'break-word' }}>
       {array.map((item) => (item))}
     </div>
-    {obj.name}
+    {JSON.stringify(obj)}
     {children}
   </div>
 );
