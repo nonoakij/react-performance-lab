@@ -9,7 +9,19 @@ interface props {
   text6: string
   text7: string
   array: number[]
-  obj: {name: string}
+  obj: {
+    squadName: string
+    homeTown: string
+    formed: number
+    secretBase: string
+    active: boolean
+    members: {
+      name: string,
+      age: number,
+      secretIdentity: string,
+      powers: string[],
+    }[]
+  }
   children: React.ReactNode
 }
 

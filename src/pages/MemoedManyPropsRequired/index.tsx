@@ -10,17 +10,17 @@ interface State {
   renderCount: number
   arr: number[]
   obj: {
-    id: number
-    name: string
-    data: {
-      height: number
-      weight: number
-      age: number
-      birthplace: {
-        country: string
-        city: string
-      }
-    }
+    squadName: string
+    homeTown: string
+    formed: number
+    secretBase: string
+    active: boolean
+    members: {
+      name: string,
+      age: number,
+      secretIdentity: string,
+      powers: string[],
+    }[]
   }
 }
 
@@ -32,17 +32,45 @@ class memoedManyPropsRequiredPage extends React.Component<Props, State> {
       renderCount: 0,
       arr,
       obj: {
-        id: 123456,
-        name: 'jordan',
-        data: {
-          height: 198,
-          weight: 98,
-          age: 57,
-          birthplace: {
-            country: 'us',
-            city: 'NY',
+        squadName: 'Super hero squad',
+        homeTown: 'Metro City',
+        formed: 2016,
+        secretBase: 'Super tower',
+        active: true,
+        members: [
+          {
+            name: 'Molecule Man',
+            age: 29,
+            secretIdentity: 'Dan Jukes',
+            powers: [
+              'Radiation resistance',
+              'Turning tiny',
+              'Radiation blast',
+            ],
           },
-        },
+          {
+            name: 'Madame Uppercut',
+            age: 39,
+            secretIdentity: 'Jane Wilson',
+            powers: [
+              'Million tonne punch',
+              'Damage resistance',
+              'Superhuman reflexes',
+            ],
+          },
+          {
+            name: 'Eternal Flame',
+            age: 1000000,
+            secretIdentity: 'Unknown',
+            powers: [
+              'Immortality',
+              'Heat Immunity',
+              'Inferno',
+              'Teleportation',
+              'Interdimensional travel',
+            ],
+          },
+        ],
       },
     };
   }
