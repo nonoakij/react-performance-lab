@@ -19,6 +19,11 @@ const TopPage: React.FC = () => (
       </Link>
     </div>
     <div>
+      <Link to="/manyChildren">
+        manyChildren
+      </Link>
+    </div>
+    <div>
       <Link to="/memoed">
         memoed
       </Link>
@@ -31,6 +36,11 @@ const TopPage: React.FC = () => (
     <div>
       <Link to="/memoedManyPropsRequired">
         memoedManyPropsRequired
+      </Link>
+    </div>
+    <div>
+      <Link to="/memoedManyChildren">
+        memoedManyChildren
       </Link>
     </div>
   </>

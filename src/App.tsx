@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TopPage from './pages/Top';
 import Header from './components/Header';
-import ManyPropsRequiredPage from './pages/ManyPropsRequired';
 import FunctionalPage from './pages/Functional';
 import MemoedFunctionalPage from './pages/MemoedFunctional';
 import HeavyPage from './pages/Heavy';
 import MemoedHeavyPage from './pages/MemoedHeavy';
+import ManyPropsRequiredPage from './pages/ManyPropsRequired';
 import MemoedManyPropsRequiredPage from './pages/MemoedManyPropsRequired';
+import ManyChildren from './pages/ManyChildren';
+import MemoedManyChildren from './pages/MemoedManyChildren';
 
 const App: React.FC = () => {
   const [volume, setVolume] = useState(1);
@@ -22,9 +24,11 @@ const App: React.FC = () => {
           <Route exact path="/functional" component={() => <FunctionalPage volume={volume} />} />
           <Route exact path="/heavy" component={() => <HeavyPage volume={volume} />} />
           <Route exact path="/manyPropsRequired" component={() => <ManyPropsRequiredPage volume={volume} />} />
+          <Route exact path="/manyChildren" component={() => <ManyChildren volume={volume} />} />
           <Route exact path="/memoed" component={() => <MemoedFunctionalPage volume={volume} />} />
           <Route exact path="/memoedHeavy" component={() => <MemoedHeavyPage volume={volume} />} />
           <Route exact path="/memoedManyPropsRequired" component={() => <MemoedManyPropsRequiredPage volume={volume} />} />
+          <Route exact path="/memoedManyChildren" component={() => <MemoedManyChildren volume={volume} />} />
         </Switch>
       </BrowserRouter>
     </div>
