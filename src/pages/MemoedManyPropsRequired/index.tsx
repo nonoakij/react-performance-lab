@@ -1,6 +1,6 @@
-import React from 'react';
-import MemoedComponent from '../../components/MemoedComponent';
-import MemoedManyPropsRequiredComponent from '../../components/MemoedManyPropsRequiredComponent';
+import React from 'react'
+import MemoedComponent from '../../components/MemoedComponent'
+import MemoedManyPropsRequiredComponent from '../../components/MemoedManyPropsRequiredComponent'
 
 interface Props {
   volume: number
@@ -16,18 +16,18 @@ interface State {
     secretBase: string
     active: boolean
     members: {
-      name: string,
-      age: number,
-      secretIdentity: string,
-      powers: string[],
+      name: string
+      age: number
+      secretIdentity: string
+      powers: string[]
     }[]
   }
 }
 
 class memoedManyPropsRequiredPage extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props);
-    const arr = [...Array(props.volume)].map((_, i) => i);
+    super(props)
+    const arr = [...Array(props.volume)].map((_, i) => i)
     this.state = {
       renderCount: 0,
       arr,
@@ -42,11 +42,7 @@ class memoedManyPropsRequiredPage extends React.Component<Props, State> {
             name: 'Molecule Man',
             age: 29,
             secretIdentity: 'Dan Jukes',
-            powers: [
-              'Radiation resistance',
-              'Turning tiny',
-              'Radiation blast',
-            ],
+            powers: ['Radiation resistance', 'Turning tiny', 'Radiation blast']
           },
           {
             name: 'Madame Uppercut',
@@ -55,8 +51,8 @@ class memoedManyPropsRequiredPage extends React.Component<Props, State> {
             powers: [
               'Million tonne punch',
               'Damage resistance',
-              'Superhuman reflexes',
-            ],
+              'Superhuman reflexes'
+            ]
           },
           {
             name: 'Eternal Flame',
@@ -67,42 +63,45 @@ class memoedManyPropsRequiredPage extends React.Component<Props, State> {
               'Heat Immunity',
               'Inferno',
               'Teleportation',
-              'Interdimensional travel',
-            ],
-          },
-        ],
-      },
-    };
+              'Interdimensional travel'
+            ]
+          }
+        ]
+      }
+    }
   }
 
   shouldComponentUpdate(): boolean {
-    performance.mark('update');
-    return true;
+    performance.mark('update')
+    return true
   }
 
   componentDidUpdate(): void {
-    performance.mark('updated');
-    performance.measure('measure update to updated', 'update', 'updated');
-    console.log(performance.getEntriesByType('measure'));
+    performance.mark('updated')
+    performance.measure('measure update to updated', 'update', 'updated')
+    console.log(performance.getEntriesByType('measure'))
   }
 
   componentWillUnmount(): void {
-    performance.clearMarks();
-    performance.clearMeasures();
+    performance.clearMarks()
+    performance.clearMeasures()
   }
 
   render(): JSX.Element {
-    const { renderCount, arr, obj } = this.state;
+    const { renderCount, arr, obj } = this.state
     return (
       <div>
         <div style={{ paddingBottom: '16px' }}>
           page component: called {renderCount} times
           <button
             type="button"
-            onClick={() => this.setState({
-              renderCount: renderCount + 1,
-            })}
-          >update
+            onClick={() =>
+              this.setState({
+                renderCount: renderCount + 1
+              })
+            }
+          >
+            update
           </button>
         </div>
         <MemoedManyPropsRequiredComponent
@@ -123,8 +122,8 @@ class memoedManyPropsRequiredPage extends React.Component<Props, State> {
           <MemoedComponent text="text" />
         </MemoedManyPropsRequiredComponent>
       </div>
-    );
+    )
   }
 }
 
-export default memoedManyPropsRequiredPage;
+export default memoedManyPropsRequiredPage

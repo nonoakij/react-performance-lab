@@ -1,4 +1,4 @@
-import React from 'react';
-import HeavyComponent from '../HeavyComponent';
+import React from 'react'
+import HeavyComponent from '../HeavyComponent'
 
-export default React.memo(HeavyComponent);
+export default React.memo(HeavyComponent)

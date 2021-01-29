@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 interface props {
   text1: string
@@ -16,10 +16,10 @@ interface props {
     secretBase: string
     active: boolean
     members: {
-      name: string,
-      age: number,
-      secretIdentity: string,
-      powers: string[],
+      name: string
+      age: number
+      secretIdentity: string
+      powers: string[]
     }[]
   }
   children: React.ReactNode
@@ -35,22 +35,14 @@ const manyPropsRequiredComponent: React.FC<props> = ({
   text7,
   array,
   obj,
-  children,
+  children
 }) => (
   <div style={{ border: 'solid 1px black', padding: '8px' }}>
-    {text1},
-    {text2},
-    {text3},
-    {text4},
-    {text5},
-    {text6},
-    {text7},
-    <div style={{ wordBreak: 'break-word' }}>
-      {array.map((item) => (item))}
-    </div>
+    {text1},{text2},{text3},{text4},{text5},{text6},{text7},
+    <div style={{ wordBreak: 'break-word' }}>{array.map((item) => item)}</div>
     {JSON.stringify(obj)}
     {children}
   </div>
-);
+)
 
-export default manyPropsRequiredComponent;
+export default manyPropsRequiredComponent

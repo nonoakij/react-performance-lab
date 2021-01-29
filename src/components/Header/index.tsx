@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface Props {
   volume: number
@@ -7,19 +7,19 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ volume, setVolume }) => {
-  const [value, setValue] = useState(volume);
+  const [value, setValue] = useState(volume)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number(e.currentTarget.value)) {
-      setValue(Number(e.currentTarget.value));
+      setValue(Number(e.currentTarget.value))
     } else {
-      alert('数字を入力してください');
+      alert('数字を入力してください')
     }
-  };
+  }
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setVolume?.(value);
-  };
+    e.preventDefault()
+    setVolume?.(value)
+  }
 
   return (
     <>
@@ -28,12 +28,17 @@ const Header: React.FC<Props> = ({ volume, setVolume }) => {
       <form name="form" onSubmit={handleOnSubmit}>
         <label htmlFor="input">
           set volume
-          <input id="input" type="text" value={value} onChange={handleInputChange} />
+          <input
+            id="input"
+            type="text"
+            value={value}
+            onChange={handleInputChange}
+          />
         </label>
         <button type="submit">submit</button>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

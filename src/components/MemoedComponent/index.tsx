@@ -1,4 +1,4 @@
-import React from 'react';
-import functionComponent from '../FunctionalComponent';
+import React from 'react'
+import functionComponent from '../FunctionalComponent'
 
-export default React.memo(functionComponent);
+export default React.memo(functionComponent)

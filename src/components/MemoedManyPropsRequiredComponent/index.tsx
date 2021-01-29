@@ -1,4 +1,4 @@
-import React from 'react';
-import manyPropsRequiredComponent from '../ManyPropsRequiredComponent';
+import React from 'react'
+import manyPropsRequiredComponent from '../ManyPropsRequiredComponent'
 
-export default React.memo(manyPropsRequiredComponent);
+export default React.memo(manyPropsRequiredComponent)
