@@ -1,5 +1,5 @@
 import React from 'react'
-import WrapComponent from '../../components/WrapComponent'
+import MemoedComponent from '../../components/MemoedComponent'
 
 interface Props {
   volume: number
@@ -7,21 +7,13 @@ interface Props {
 
 interface State {
   renderCount: number
-  data: { [k: number]: number }
 }
 
-class functionalPage extends React.Component<Props, State> {
+class memoedEveryTimeUpdatePage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    const { volume } = this.props
-    const data = new Array(volume).reduce((p, c, i) => {
-      Object.assign(p, { i })
-      return p
-    }, {})
-
     this.state = {
-      renderCount: 0,
-      data
+      renderCount: 0
     }
   }
 
@@ -42,7 +34,8 @@ class functionalPage extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { renderCount, data } = this.state
+    const { renderCount } = this.state
+    const { volume } = this.props
     return (
       <div>
         <div style={{ paddingBottom: '16px' }}>
@@ -57,11 +50,13 @@ class functionalPage extends React.Component<Props, State> {
           >
             update
           </button>
-          <WrapComponent {...data} />
         </div>
+        {[...Array(volume)].map((_, i) => (
+          <MemoedComponent key={i} text={`${renderCount}`} />
+        ))}
       </div>
     )
   }
 }
 
-export default functionalPage
+export default memoedEveryTimeUpdatePage

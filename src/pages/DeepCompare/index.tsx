@@ -1,27 +1,19 @@
 import React from 'react'
-import WrapComponent from '../../components/WrapComponent'
+import DeepCompare from '../../components/DeepCompare'
 
-interface Props {
+export interface deepCompareProps {
   volume: number
 }
 
-interface State {
+export interface deepCompareState {
   renderCount: number
-  data: { [k: number]: number }
 }
 
-class functionalPage extends React.Component<Props, State> {
-  constructor(props: Props) {
+class deepCompare extends React.Component<deepCompareProps, deepCompareState> {
+  constructor(props: deepCompareProps) {
     super(props)
-    const { volume } = this.props
-    const data = new Array(volume).reduce((p, c, i) => {
-      Object.assign(p, { i })
-      return p
-    }, {})
-
     this.state = {
-      renderCount: 0,
-      data
+      renderCount: 0
     }
   }
 
@@ -42,7 +34,8 @@ class functionalPage extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { renderCount, data } = this.state
+    const { renderCount } = this.state
+
     return (
       <div>
         <div style={{ paddingBottom: '16px' }}>
@@ -57,11 +50,11 @@ class functionalPage extends React.Component<Props, State> {
           >
             update
           </button>
-          <WrapComponent {...data} />
         </div>
+        <DeepCompare myObj={{ a: { b: { c: { d: 'd' } } } }} />
       </div>
     )
   }
 }
 
-export default functionalPage
+export default deepCompare

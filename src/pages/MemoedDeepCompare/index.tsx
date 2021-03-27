@@ -1,27 +1,24 @@
 import React from 'react'
-import WrapComponent from '../../components/WrapComponent'
+import MemoedDeepCompare from '../../components/MemoedDeepCompare'
 
-interface Props {
+export interface memoedDeepCompareProps {
   volume: number
 }
 
-interface State {
+export interface memoedDeepCompareState {
   renderCount: number
-  data: { [k: number]: number }
+  myObj: { [k: string]: any }
 }
 
-class functionalPage extends React.Component<Props, State> {
-  constructor(props: Props) {
+class memoedDeepCompare extends React.Component<
+  memoedDeepCompareProps,
+  memoedDeepCompareState
+> {
+  constructor(props: memoedDeepCompareProps) {
     super(props)
-    const { volume } = this.props
-    const data = new Array(volume).reduce((p, c, i) => {
-      Object.assign(p, { i })
-      return p
-    }, {})
-
     this.state = {
       renderCount: 0,
-      data
+      myObj: { a: { b: { c: { d: 'd' } } } }
     }
   }
 
@@ -42,7 +39,8 @@ class functionalPage extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { renderCount, data } = this.state
+    const { renderCount, myObj } = this.state
+
     return (
       <div>
         <div style={{ paddingBottom: '16px' }}>
@@ -57,11 +55,11 @@ class functionalPage extends React.Component<Props, State> {
           >
             update
           </button>
-          <WrapComponent {...data} />
         </div>
+        <MemoedDeepCompare myObj={myObj} />
       </div>
     )
   }
 }
 
-export default functionalPage
+export default memoedDeepCompare
