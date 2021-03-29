@@ -7,13 +7,25 @@ interface Props {
 
 interface State {
   renderCount: number
+  data: { [k: string]: number }
 }
 
 class functionalPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    const { volume } = this.props
+    const list = new Array(volume)
+    for (let i = 0; i < list.length; i += 1) {
+      list[i] = i
+    }
+
+    const data = list.reduce((p, c) => {
+      Object.assign(p, { [c]: c })
+      return p
+    }, {})
     this.state = {
-      renderCount: 0
+      renderCount: 0,
+      data
     }
   }
 
@@ -34,8 +46,7 @@ class functionalPage extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { renderCount } = this.state
-    const { volume } = this.props
+    const { renderCount, data } = this.state
     return (
       <div>
         <div style={{ paddingBottom: '16px' }}>
@@ -50,34 +61,7 @@ class functionalPage extends React.Component<Props, State> {
           >
             update
           </button>
-          <MemoedWrapComponent
-            elements={
-              <>
-                <h1>タイトル</h1>
-                <section>
-                  <h2>サブタイトル</h2>
-                  <div style={{ display: 'flex' }}>
-                    <div>コンテンツ１</div>
-                    <div>コンテンツ2</div>
-                  </div>
-                </section>
-                <section>
-                  <h2>サブタイトル</h2>
-                  <div style={{ display: 'flex' }}>
-                    <div>コンテンツ１</div>
-                    <div>コンテンツ2</div>
-                  </div>
-                </section>
-                <section>
-                  <h2>サブタイトル</h2>
-                  <div style={{ display: 'flex' }}>
-                    <div>コンテンツ１</div>
-                    <div>コンテンツ2</div>
-                  </div>
-                </section>
-              </>
-            }
-          />
+          <MemoedWrapComponent {...data} />
         </div>
       </div>
     )

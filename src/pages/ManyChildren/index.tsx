@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react'
 import WrapComponent from '../../components/WrapComponent'
 
@@ -7,15 +8,20 @@ interface Props {
 
 interface State {
   renderCount: number
-  data: { [k: number]: number }
+  data: { [k: string]: number }
 }
 
 class functionalPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     const { volume } = this.props
-    const data = new Array(volume).reduce((p, c, i) => {
-      Object.assign(p, { i })
+    const list = new Array(volume)
+    for (let i = 0; i < list.length; i += 1) {
+      list[i] = i
+    }
+
+    const data = list.reduce((p, c) => {
+      Object.assign(p, { [c]: c })
       return p
     }, {})
 

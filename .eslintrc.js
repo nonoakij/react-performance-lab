@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     'react/jsx-one-expression-per-line': 'off',
     'react/no-array-index-key': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
