@@ -5,11 +5,7 @@ interface Props {
 }
 
 const wrapComponent: React.FC<Props> = (props) => (
-  <>
-    {Object.keys(props).map((data) => (
-      <div>{data}</div>
-    ))}
-  </>
+  <div>{Object.keys(props)}</div>
 )
 
 export default wrapComponent

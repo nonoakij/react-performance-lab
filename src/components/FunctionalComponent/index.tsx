@@ -5,7 +5,7 @@ interface props {
 }
 
 const functionComponent: React.FC<props> = ({ text }) => {
-  return <div style={{ border: 'solid 1px black', padding: '8px' }}>{text}</div>
+  return <>{text}</>
 }
 
 export default functionComponent

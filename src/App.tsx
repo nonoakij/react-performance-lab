@@ -13,7 +13,7 @@ import MemoedManyChildren from './pages/MemoedManyChildren'
 import DeepCompare from './pages/DeepCompare'
 import MemoedDeepCompare from './pages/MemoedDeepCompare'
 import UpdateEveryTime from './pages/UpdateEveryTime'
-import MemoedUpdateEveryTime from './pages/MemoedUpdateEveryTime'
+import MemoedUpdateEveryTime from './pages/MemoedEveryTimeUpdate'
 
 const App: React.FC = () => {
   const [volume, setVolume] = useState(1)
